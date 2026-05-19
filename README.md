@@ -1,25 +1,27 @@
 # Claw Client
 
-> 🤖 Claw Client 执行端 — 运行在 Ubuntu 服务器上的 AI 助手客户端，支持 Playwright 浏览器自动化
+> 🤖 Claw Client — AI Assistant Client running on Ubuntu server, supporting Playwright browser automation
 
 [![GPL-3.0 License](https://img.shields.io/badge/License-GPL--3.0-blue.svg)](LICENSE)
 [![Node.js v22+](https://img.shields.io/badge/Node.js-v22+-green.svg)](https://nodejs.org/)
 [![Playwright](https://img.shields.io/badge/Playwright-Enabled-blue.svg)](https://playwright.dev/)
+[![Stars](https://img.shields.io/github/stars/yzp100911/claw-client?style=social)](https://github.com/yzp100911/claw-client)
+[![Forks](https://img.shields.io/github/forks/yzp100911/claw-client?style=social)](https://github.com/yzp100911/claw-client)
 
-## 功能特性
+## Features
 
-- **AI 助手客户端** — 基于 xCrab Gateway 的指令执行
-- **浏览器自动化** — Playwright 驱动，可执行复杂网页操作
-- **WebSocket 通信** — 与 eClaw Server 保持实时连接
-- **后台服务运行** — 支持 systemd 服务配置
+- **AI Assistant Client** — Command execution based on xCrab Gateway
+- **Browser Automation** — Powered by Playwright, executing complex web operations
+- **WebSocket Communication** — Maintains real-time connection with eClaw Server
+- **Background Service** — Supports systemd service configuration
 
-## 环境要求
+## Requirements
 
 - Ubuntu 24.04
 - Node.js v22+
-- Playwright 浏览器依赖
+- Playwright browser dependencies
 
-## 安装
+## Installation
 
 ```bash
 git clone https://github.com/yzp100911/claw-client.git
@@ -27,48 +29,54 @@ cd claw-client/cclaw
 npm install
 ```
 
-## 配置
+## Configuration
 
-编辑 `index.js` 中的配置，填入你的服务器地址和认证信息。
+Edit the configuration in `index.js` with your server address and authentication info.
 
-## 运行
+## Running
 
 ```bash
-# 手动运行
+# Manual run
 ./start.sh
 
-# 或使用 systemd 服务
+# Or use systemd service
 sudo cp cclaw.service /etc/systemd/system/
 sudo systemctl enable cclaw
 sudo systemctl start cclaw
 ```
 
-## 服务管理
+## Service Management
 
 ```bash
-# 查看状态
+# Check status
 sudo systemctl status cclaw
 
-# 查看日志
+# View logs
 journalctl -u cclaw -f
 
-# 重启服务
+# Restart service
 sudo systemctl restart cclaw
 ```
 
-## 项目结构
+## Project Structure
 
 ```
 claw-client/
 ├── cclaw/
-│   ├── index.js          # 主入口
-│   ├── status-monitor.js # 状态监控
-│   ├── start.sh          # 启动脚本
-│   └── cclaw.service     # systemd 服务配置
-├── openclaw/             # OpenClaw 组件（已独立开源）
+│   ├── index.js          # Main entry point
+│   ├── status-monitor.js # Status monitoring
+│   ├── start.sh          # Startup script
+│   └── cclaw.service     # systemd service configuration
+├── openclaw/             # OpenClaw component (independently open-sourced)
 └── LICENSE
 ```
 
-## 开源协议
+## Related Projects
 
-本项目采用 [GPL-3.0](LICENSE) 开源协议。
+- [xCrab-Agent](https://github.com/yzp100911/xCrab-Agent) — Multi-model AI Gateway
+- [eClaw Server](https://github.com/yzp100911/eclaw-server) — Web Server
+- [Claw Client](https://github.com/yzp100911/claw-client) — Execution Client
+
+## License
+
+This project is licensed under [GPL-3.0](LICENSE).
