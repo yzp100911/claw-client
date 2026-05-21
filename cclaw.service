@@ -1,0 +1,31 @@
+[Unit]
+Description=cclaw 客户端 - 连接云端 eclaw 中间件
+After=network.target network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/cclaw-client/UbuntuClaw/cclaw
+ExecStart=/usr/bin/node /opt/cclaw-client/UbuntuClaw/cclaw/index.js
+Restart=always
+RestartSec=10
+
+# 输出日志
+StandardOutput=journal
+StandardError=journal
+
+# 环境变量（默认已设为 127.0.0.1:10090，同机部署无需修改）
+Environment=NODE_ENV=production
+Environment=LOCAL_API_PORT=10091
+# 如需连接远程服务端，取消下面注释:
+# Environment=ECLAW_API_URL=http://xunrf.cn:10090
+# Environment=ECLAW_WS_URL=ws://xunrf.cn:10090/ws
+
+# 限制
+NoNewPrivileges=true
+ProtectHome=false
+ProtectSystem=false
+
+[Install]
+WantedBy=multi-user.target
