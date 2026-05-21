@@ -81,20 +81,37 @@ npm install
 > - **方案B**：安装 [Visual Studio 2022 Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/)，勾选 "C++ 构建工具"
 > - **方案C**：使用预编译版本（如果可用）：`npm install node-pty --force`
 
-### 4️⃣ 配置连接
+### 4️⃣ 配置连接（两种方式二选一）
 
-claw-client 通过环境变量配置要连接的 eclaw-server：
+#### ⭐ 方式 A（推荐）：使用 `.env` 文件
+
+```bash
+# 复制模板文件并重命名为 .env
+copy .env.example .env
+
+# 用记事本打开 .env 修改配置
+notepad .env
+```
+
+将 `.env` 文件内容修改为你的实际配置：
+
+```env
+# 如果 eclaw-server 在同一台机器
+ECLAW_API_URL=http://127.0.0.1:10090
+ECLAW_WS_URL=ws://127.0.0.1:10090/ws
+
+# 如果 eclaw-server 在远程服务器
+# ECLAW_API_URL=http://你的服务器IP:10090
+# ECLAW_WS_URL=ws://你的服务器IP:10090/ws
+```
+
+#### 方式 B：使用系统环境变量
 
 **临时设置（当前会话有效）：**
 
 ```bash
-# 如果 eclaw-server 在同一台机器上运行
 set ECLAW_API_URL=http://127.0.0.1:10090
 set ECLAW_WS_URL=ws://127.0.0.1:10090/ws
-
-# 如果 eclaw-server 在远程服务器上
-set ECLAW_API_URL=http://你的服务器IP:10090
-set ECLAW_WS_URL=ws://你的服务器IP:10090/ws
 ```
 
 **永久设置（系统环境变量）：**
@@ -171,7 +188,27 @@ npm install
 > # sudo yum groupinstall -y "Development Tools"              # CentOS
 > ```
 
-### 4️⃣ 配置连接
+### 4️⃣ 配置连接（两种方式二选一）
+
+#### ⭐ 方式 A（推荐）：使用 `.env` 文件
+
+```bash
+# 复制模板文件并重命名为 .env
+cp .env.example .env
+
+# 编辑 .env 文件
+nano .env
+```
+
+将 `.env` 文件内容修改为你的实际配置：
+
+```env
+# 如果 eclaw-server 在同一台机器
+ECLAW_API_URL=http://127.0.0.1:10090
+ECLAW_WS_URL=ws://127.0.0.1:10090/ws
+```
+
+#### 方式 B：使用环境变量
 
 ```bash
 # 设置环境变量（临时）
@@ -244,7 +281,7 @@ sudo journalctl -u cclaw -f
 ```
 1. claw-client 启动
        │
-2. 读取 ECLAW_WS_URL 配置
+2. 读取 ECLAW_WS_URL 配置（优先 .env 文件，其次环境变量）
        │
 3. 连接 eclaw-server 的 WebSocket (ws://...:10090/ws)
        │
@@ -263,10 +300,15 @@ sudo journalctl -u cclaw -f
 
 | 变量 | 默认值 | 必填 | 说明 |
 |------|--------|------|------|
-| `ECLAW_API_URL` | `http://127.0.0.1:10090` | ✅ | eclaw-server HTTP 地址 |
+| `ECLAW_API_URL` | `http://127.0.0.1:10090` | ✅ | eclaw-server HTTP API 地址 |
 | `ECLAW_WS_URL` | `ws://127.0.0.1:10090/ws` | ✅ | eclaw-server WebSocket 地址 |
+| `CCLAW_AI_BACKEND` | `xcrab` | ❌ | AI 后端选择（`xcrab` 推荐 / `hermes` 已废弃） |
+| `XCRAB_GATEWAY_URL` | `http://localhost:3000` | ❌ | xCrab-Agent 网关地址 |
+| `XCRAB_GATEWAY_TOKEN` | `100911yzpYZP@` | ❌ | xCrab-Agent 网关令牌 |
 | `LOCAL_API_PORT` | `10091` | ❌ | 本地健康检查 API 端口 |
 | `NODE_ENV` | `production` | ❌ | 运行环境 |
+
+> 💡 **配置优先级**：`.env` 文件 > 系统环境变量 > 代码默认值
 
 ---
 
@@ -278,6 +320,7 @@ claw-client/
 ├── package.json          # 依赖配置
 ├── start.sh              # Ubuntu 启动脚本
 ├── cclaw.service         # Linux systemd 服务文件
+├── .env.example          # ⭐ 环境变量模板（复制为 .env 后生效）
 ├── .gitignore            # Git 忽略规则
 │
 ├── data/                 # 数据存储目录
