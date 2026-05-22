@@ -23,9 +23,9 @@
                           └──────────────────┘
 ```
 
-> - **claw-client** = 在目标服务器上执行命令的执行端 ← **本仓库**
-> - **eclaw-server** = 中转调度服务器（claw-client 连接到它接收指令）
-> - **xCrab-Agent** = 提供 AI 对话能力（可选）
+> - [**claw-client**](https://github.com/yzp100911/claw-client) = 在目标服务器上执行命令的执行端 ← **本仓库**
+> - [**eclaw-server**](https://github.com/yzp100911/eclaw-server) = 中转调度服务器（claw-client 连接到它接收指令）
+> - [**xCrab-Agent**](https://github.com/yzp100911/xCrab-Agent) = 提供 AI 对话能力（可选）
 
 ---
 
